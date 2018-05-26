@@ -1,0 +1,4 @@
+--require should
+--require should-sinon
+--recursive
+-t 60000
