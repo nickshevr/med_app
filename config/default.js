@@ -19,4 +19,10 @@ module.exports = {
         password: 'test',
         host: '127.0.0.1',
     },
+    logger: {
+        app_id: 'api-rest',
+    },
+    auth: {
+        secret: 'med_app',
+    },
 };

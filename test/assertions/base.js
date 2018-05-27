@@ -25,7 +25,7 @@ should.Assertion.add(
         should.exists(user);
         user.should.be.an.Object;
         user.should.be.a.objectWithAtTimespamp();
-        user.should.have.properties(['id', 'username', 'email', 'hash', 'salt']);
+        user.should.have.properties(['id', 'email', 'hash', 'salt']);
     },
     true,
 );

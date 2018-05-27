@@ -14,9 +14,9 @@ const RIGHT_TYPE = {
     type: Sequelize.ENUM(RIGHT_TYPES.USER, RIGHT_TYPES.DOCTOR, RIGHT_TYPES.MANAGER),
 };
 
-const Employee = sequelizeInstance.define(
+const Right = sequelizeInstance.define(
     'right',
     compose([ENTITY_FIELDS, BASE_FIELDS, RIGHT_TYPE]),
 );
 
-module.exports = Employee;
+module.exports = Right;

@@ -7,20 +7,25 @@
     "babel-eslint": "^8.2.3",
     "body-parser": "^1.17.2",
     "config": "^1.26.1",
+    "connect-pg-simple": "^4.2.1",
     "express": "^4.15.3",
+    "express-session": "^1.15.6",
     "express-validation": "^1.0.2",
+    "flow": "^0.2.3",
+    "flow-bin": "^0.66.0",
     "http-errors": "^1.6.1",
     "joi": "^10.6.0",
     "lodash": "^4.17.10",
+    "method-override": "^2.3.10",
     "morgan": "^1.8.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pg": "6.4.0",
+    "pg-hstore": "^2.3.2",
     "pino": "^4.15.0",
     "revalidator": "^0.3.1",
     "sequelize": "^4.4.0",
-    "sequelize-cli": "^2.7.0",
-    "flow": "^0.2.3",
-    "flow-bin": "^0.66.0",
-    "pg": "6.4.0",
-    "pg-hstore": "^2.3.2"
+    "sequelize-cli": "^2.7.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -36,6 +41,7 @@
     "supertest": "^1.1.0"
   },
   "scripts": {
+    "start": "NODE_PATH=./ node api-rest/app",
     "forceSync": "node db/forceSync",
     "test": "NODE_PATH=./ NODE_ENV=test mocha"
   },
