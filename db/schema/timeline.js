@@ -5,4 +5,7 @@ const TIMELINE_FIELDS = {
     time_end: Sequelize.DATE,
 };
 
-module.exports = TIMELINE_FIELDS;
+module.exports = {
+    fields: TIMELINE_FIELDS,
+    methods: {},
+};

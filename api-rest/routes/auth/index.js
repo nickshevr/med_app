@@ -31,7 +31,7 @@ const login = async (req, res, next) => {
     passport.authenticate('local', (error, user) => {
         if (error) return next(error);
 
-        req.logIn(user.dataValues, err => (err ? next(err) : next()));
+        return req.logIn(user, err => (err ? next(err) : next()));
     })(req, res, next);
 };
 
@@ -39,7 +39,7 @@ const responseUser = async (req, res, next) => {
     try {
         const user = await User.findOne({ where: { id: req.user.id } });
 
-        res.json(user.toJSON());
+        return res.json(user.toJSON());
     } catch (e) {
         return next(e);
     }
@@ -52,7 +52,7 @@ const logout = (req, res, next) => {
         }
 
         res.clearCookie('sid');
-        res.json({ logout: 'success' });
+        return res.json({ logout: 'success' });
     });
 };
 

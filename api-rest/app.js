@@ -16,13 +16,14 @@ const pgPool = require('db/pool');
 const passport = require('auth');
 
 const AuthRouter = require('api-rest/routes/auth');
+const RestRouter = require('api-rest/routes/model');
 
 const app = express();
 
 app.use(morgan('combined'));
 app.use(bodyParser.json(bodyParsertConf.json));
 app.use(bodyParser.urlencoded(bodyParsertConf.urlencoded));
-app.use(passport.initialize());
+
 app.use(session({
     store: new pgSession({
         pool: pgPool,
@@ -32,7 +33,11 @@ app.use(session({
     resave: true,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/api/v1/', AuthRouter);
+app.use('/api/v1/', RestRouter);
 app.use((req, res) => {
     res.status(404).json({ error: 404, message: 'route not found' });
 });

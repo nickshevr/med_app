@@ -50,14 +50,14 @@ describe('User routes', () => {
         it('Login with invalid data ${login}', async () => {
             const res = await agent.post('/api/v1/login')
                 .send({
-                    email: 'WrongLogin',
+                    email: 'WrongLogin@ya.ru',
                     password: '123123',
                 });
 
             res.body.should.be.deepEqual({
                 message: 'Unregistered Email',
                 name: 'NotFoundError',
-                statusCode: 404
+                statusCode: 404,
             });
         });
     });

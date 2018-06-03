@@ -10,4 +10,7 @@ const BASE_FIELDS = {
     updatedAt: Sequelize.DATE,
 };
 
-module.exports = BASE_FIELDS;
+module.exports = {
+    fields: BASE_FIELDS,
+    methods: {},
+};

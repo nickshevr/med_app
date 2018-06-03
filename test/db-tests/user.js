@@ -1,5 +1,3 @@
-
-
 const sequalizeInstace = require('db/adapter');
 const User = require('db/models/user');
 const should = require('should');
@@ -9,7 +7,7 @@ describe('User model', () => {
         await sequalizeInstace.sync({ force: true });
     });
 
-    it('Should create player', async () => {
+    it('Should create user', async () => {
         const user = await User.create();
 
         user.should.be.User();

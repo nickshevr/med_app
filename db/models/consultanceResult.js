@@ -1,17 +1,23 @@
 const Sequelize = require('sequelize');
 const sequelizeInstance = require('db/adapter');
-const { compose } = require('db/schema');
-const BASE_FIELDS = require('db/schema/base');
-const ENTITY_FIELDS = require('db/schema/entity');
-const LINKABLE_FIELDS = require('db/schema/linkable');
+const { compose, applyMethods } = require('db/schema');
+const BASE = require('db/schema/base');
+const ENTITY = require('db/schema/entity');
+const linkablePlugin = require('db/schema/linkable');
 
 const DESCRIPTION_SCHEMA = {
-    description: Sequelize.STRING,
+    fields: {
+        description: Sequelize.STRING,
+    },
 };
 
-const Employee = sequelizeInstance.define(
+const CONSULTANCE_RESULT_SCHEMA = linkablePlugin('consultance');
+
+const ConsultanceResult = sequelizeInstance.define(
     'consultanceResult',
-    compose([ENTITY_FIELDS, BASE_FIELDS, LINKABLE_FIELDS, DESCRIPTION_SCHEMA]),
+    compose([ENTITY, BASE, CONSULTANCE_RESULT_SCHEMA, DESCRIPTION_SCHEMA]),
 );
 
-module.exports = Employee;
+applyMethods(ENTITY, ConsultanceResult);
+
+module.exports = ConsultanceResult;

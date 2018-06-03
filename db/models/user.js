@@ -1,10 +1,12 @@
 const Sequelize = require('sequelize');
 const crypto = require('crypto');
-const { omit } = require('lodash/fp');
+const { omit, isEmpty } = require('lodash/fp');
 
 const sequelizeInstance = require('db/adapter');
 const { compose } = require('db/schema');
-const BASE_FIELDS = require('db/schema/base');
+const BASE = require('db/schema/base');
+
+const { Employee } = require('db/models');
 
 const USER_FIELDS = {
     email: {
@@ -23,7 +25,11 @@ const USER_FIELDS = {
     },
 };
 
-const User = sequelizeInstance.define('user', compose([USER_FIELDS, BASE_FIELDS]));
+const USER_SCHEMA = {
+    fields: USER_FIELDS,
+};
+
+const User = sequelizeInstance.define('user', compose([USER_SCHEMA, BASE]));
 
 User.prototype.checkPassword = function (password) {
     return User.encryptPassword(password, this.salt) === this.hash;
@@ -31,6 +37,14 @@ User.prototype.checkPassword = function (password) {
 
 User.prototype.toJSON = function () {
     return omit(['hash', 'salt'], this.dataValues);
+};
+
+User.prototype.isEmployee = async function () {
+    const employee = await Employee.find({
+        userId: this.id,
+    });
+
+    return !isEmpty(employee);
 };
 
 User.encryptPassword = (password, salt) => {
