@@ -36,6 +36,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4100');
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    return next();
+});
+
 app.use('/api/v1/', AuthRouter);
 app.use('/api/v1/', RestRouter);
 app.use((req, res) => {
